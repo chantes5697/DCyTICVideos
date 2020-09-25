@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="VideosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Casette">
+    <Key>
+      <PropertyRef Name="id_casette" />
+    </Key>
+    <Property Name="id_casette" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="clave" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <Property Name="formato" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Formato1" Relationship="Self.FK_Casettes_Formato" FromRole="Casettes" ToRole="Formato" />
+    <NavigationProperty Name="Videos" Relationship="Self.FK_Videos_Casette" FromRole="Casettes" ToRole="Videos" />
+  </EntityType>
+  <EntityType Name="Formato">
+    <Key>
+      <PropertyRef Name="id_formato" />
+    </Key>
+    <Property Name="id_formato" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="formato1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Casettes" Relationship="Self.FK_Casettes_Formato" FromRole="Formato" ToRole="Casettes" />
+  </EntityType>
+  <EntityType Name="Video">
+    <Key>
+      <PropertyRef Name="id_video" />
+    </Key>
+    <Property Name="id_video" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="casette" Type="Int32" Nullable="false" />
+    <Property Name="contenido" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="duracion" Type="Time" Nullable="false" Precision="7" />
+    <NavigationProperty Name="Casette1" Relationship="Self.FK_Videos_Casette" FromRole="Videos" ToRole="Casettes" />
+    <NavigationProperty Name="Filtroes" Relationship="Self.FK_Filtro_Videos" FromRole="Videos" ToRole="Filtro" />
+  </EntityType>
+  <EntityType Name="Filtro">
+    <Key>
+      <PropertyRef Name="id_filtro" />
+      <PropertyRef Name="contenido" />
+      <PropertyRef Name="fecha" />
+      <PropertyRef Name="duracion" />
+      <PropertyRef Name="videos" />
+    </Key>
+    <Property Name="id_filtro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="contenido" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="duracion" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="videos" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Video" Relationship="Self.FK_Filtro_Videos" FromRole="Filtro" ToRole="Videos" />
+  </EntityType>
+  <Association Name="FK_Casettes_Formato">
+    <End Role="Formato" Type="Self.Formato" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Casettes" Type="Self.Casette" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Formato">
+        <PropertyRef Name="id_formato" />
+      </Principal>
+      <Dependent Role="Casettes">
+        <PropertyRef Name="formato" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Videos_Casette">
+    <End Role="Casettes" Type="Self.Casette" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Videos" Type="Self.Video" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Casettes">
+        <PropertyRef Name="id_casette" />
+      </Principal>
+      <Dependent Role="Videos">
+        <PropertyRef Name="casette" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Filtro_Videos">
+    <End Role="Videos" Type="Self.Video" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Filtro" Type="Self.Filtro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Videos">
+        <PropertyRef Name="id_video" />
+      </Principal>
+      <Dependent Role="Filtro">
+        <PropertyRef Name="videos" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="VideosEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Casettes" EntityType="Self.Casette" />
+    <EntitySet Name="Formatoes" EntityType="Self.Formato" />
+    <EntitySet Name="Videos" EntityType="Self.Video" />
+    <EntitySet Name="Filtroes" EntityType="Self.Filtro" />
+    <AssociationSet Name="FK_Casettes_Formato" Association="Self.FK_Casettes_Formato">
+      <End Role="Formato" EntitySet="Formatoes" />
+      <End Role="Casettes" EntitySet="Casettes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Videos_Casette" Association="Self.FK_Videos_Casette">
+      <End Role="Casettes" EntitySet="Casettes" />
+      <End Role="Videos" EntitySet="Videos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Filtro_Videos" Association="Self.FK_Filtro_Videos">
+      <End Role="Videos" EntitySet="Videos" />
+      <End Role="Filtro" EntitySet="Filtroes" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
