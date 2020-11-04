@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="VideosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="VideosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Casettes">
           <Key>
             <PropertyRef Name="id_casette" />
@@ -37,6 +37,22 @@ warning 6002: The table/view 'Videos.dbo.Filtro' does not have a primary key def
           <Property Name="id_formato" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="formato" Type="text" Nullable="false" />
           <Property Name="estado" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="id_rol" />
+          </Key>
+          <Property Name="id_rol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="text" Nullable="false" />
+          <Property Name="rol" Type="int" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <EntityType Name="Videos">
           <Key>
@@ -76,6 +92,18 @@ warning 6002: The table/view 'Videos.dbo.Filtro' does not have a primary key def
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Usuarios_Rol">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="id_rol" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Videos_Casette">
           <End Role="Casettes" Type="Self.Casettes" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -90,9 +118,23 @@ warning 6002: The table/view 'Videos.dbo.Filtro' does not have a primary key def
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Videos_Casettes">
+          <End Role="Casettes" Type="Self.Casettes" Multiplicity="1" />
+          <End Role="Videos" Type="Self.Videos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Casettes">
+              <PropertyRef Name="id_casette" />
+            </Principal>
+            <Dependent Role="Videos">
+              <PropertyRef Name="casette" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="VideosModelStoreContainer">
           <EntitySet Name="Casettes" EntityType="Self.Casettes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Formato" EntityType="Self.Formato" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Videos" EntityType="Self.Videos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Filtro" EntityType="Self.Filtro" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -111,13 +153,20 @@ warning 6002: The table/view 'Videos.dbo.Filtro' does not have a primary key def
             <End Role="Videos" EntitySet="Videos" />
             <End Role="Filtro" EntitySet="Filtro" />
           </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_Rol" Association="Self.FK_Usuarios_Rol">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
           <AssociationSet Name="FK_Videos_Casette" Association="Self.FK_Videos_Casette">
             <End Role="Casettes" EntitySet="Casettes" />
             <End Role="Videos" EntitySet="Videos" />
           </AssociationSet>
+          <AssociationSet Name="FK_Videos_Casettes" Association="Self.FK_Videos_Casettes">
+            <End Role="Casettes" EntitySet="Casettes" />
+            <End Role="Videos" EntitySet="Videos" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="VideosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -227,7 +276,43 @@ warning 6002: The table/view 'Videos.dbo.Filtro' does not have a primary key def
             <End Role="Videos" EntitySet="Videos" />
             <End Role="Filtro" EntitySet="Filtroes" />
           </AssociationSet>
+          <EntitySet Name="Rols" EntityType="VideosModel.Rol" />
+          <EntitySet Name="Usuarios" EntityType="VideosModel.Usuario" />
+          <AssociationSet Name="FK_Usuarios_Rol" Association="VideosModel.FK_Usuarios_Rol">
+            <End Role="Rol" EntitySet="Rols" />
+            <End Role="Usuario" EntitySet="Usuarios" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="id_rol" />
+          </Key>
+          <Property Name="id_rol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Usuarios" Relationship="VideosModel.FK_Usuarios_Rol" FromRole="Rol" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="rol" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Rol1" Relationship="VideosModel.FK_Usuarios_Rol" FromRole="Usuario" ToRole="Rol" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_Usuarios_Rol">
+          <End Type="VideosModel.Rol" Role="Rol" Multiplicity="1" />
+          <End Type="VideosModel.Usuario" Role="Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="id_rol" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -272,6 +357,24 @@ warning 6002: The table/view 'Videos.dbo.Filtro' does not have a primary key def
                 <ScalarProperty Name="fecha" ColumnName="fecha" />
                 <ScalarProperty Name="duracion" ColumnName="duracion" />
                 <ScalarProperty Name="videos" ColumnName="videos" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rols">
+            <EntityTypeMapping TypeName="VideosModel.Rol">
+              <MappingFragment StoreEntitySet="Rol">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id_rol" ColumnName="id_rol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="VideosModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="rol" ColumnName="rol" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

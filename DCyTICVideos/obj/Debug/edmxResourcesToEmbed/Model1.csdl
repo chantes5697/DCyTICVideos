@@ -106,5 +106,40 @@
       <End Role="Videos" EntitySet="Videos" />
       <End Role="Filtro" EntitySet="Filtroes" />
     </AssociationSet>
+    <EntitySet Name="Rols" EntityType="VideosModel.Rol" />
+    <EntitySet Name="Usuarios" EntityType="VideosModel.Usuario" />
+    <AssociationSet Name="FK_Usuarios_Rol" Association="VideosModel.FK_Usuarios_Rol">
+      <End Role="Rol" EntitySet="Rols" />
+      <End Role="Usuario" EntitySet="Usuarios" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Rol">
+    <Key>
+      <PropertyRef Name="id_rol" />
+    </Key>
+    <Property Name="id_rol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Usuarios" Relationship="VideosModel.FK_Usuarios_Rol" FromRole="Rol" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="id_usuario" />
+    </Key>
+    <Property Name="id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="rol" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Rol1" Relationship="VideosModel.FK_Usuarios_Rol" FromRole="Usuario" ToRole="Rol" />
+  </EntityType>
+  <Association Name="FK_Usuarios_Rol">
+    <End Type="VideosModel.Rol" Role="Rol" Multiplicity="1" />
+    <End Type="VideosModel.Usuario" Role="Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rol">
+        <PropertyRef Name="id_rol" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="rol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>
