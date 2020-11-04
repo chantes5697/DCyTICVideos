@@ -53,6 +53,7 @@
     <EntitySetMapping Name="Usuarios">
       <EntityTypeMapping TypeName="VideosModel.Usuario">
         <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="password" ColumnName="password" />
           <ScalarProperty Name="rol" ColumnName="rol" />
           <ScalarProperty Name="username" ColumnName="username" />
           <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />

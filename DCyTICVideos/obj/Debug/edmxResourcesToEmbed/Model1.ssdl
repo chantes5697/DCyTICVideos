@@ -47,6 +47,7 @@ warning 6002: The table/view 'Videos.dbo.Filtro' does not have a primary key def
     <Property Name="id_usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="username" Type="text" Nullable="false" />
     <Property Name="rol" Type="int" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="255" Nullable="false" />
   </EntityType>
   <EntityType Name="Videos">
     <Key>

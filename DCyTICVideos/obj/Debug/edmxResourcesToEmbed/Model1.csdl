@@ -129,6 +129,7 @@
     <Property Name="username" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="rol" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Rol1" Relationship="VideosModel.FK_Usuarios_Rol" FromRole="Usuario" ToRole="Rol" />
+    <Property Name="password" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK_Usuarios_Rol">
     <End Type="VideosModel.Rol" Role="Rol" Multiplicity="1" />
