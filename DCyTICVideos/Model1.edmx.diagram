@@ -13,8 +13,8 @@
         <AssociationConnector Association="VideosModel.FK_Videos_Casette" ManuallyRouted="false" />
         <AssociationConnector Association="VideosModel.FK_Filtro_Videos" ManuallyRouted="false" />
         <EntityTypeShape EntityType="VideosModel.Rol" Width="1.5" PointX="0.75" PointY="5" />
-        <EntityTypeShape EntityType="VideosModel.Usuario" Width="1.5" PointX="3" PointY="4.875" />
-        <AssociationConnector Association="VideosModel.FK_Usuarios_Rol" />
+        <EntityTypeShape EntityType="VideosModel.Usuario1" Width="1.5" PointX="3" PointY="7.875" />
+        <AssociationConnector Association="VideosModel.FK_Usuario_Rol" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

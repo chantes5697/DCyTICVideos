@@ -45,7 +45,7 @@ warning 6002: The table/view 'Videos.dbo.Filtro' does not have a primary key def
           <Property Name="id_rol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombre" Type="text" Nullable="false" />
         </EntityType>
-        <EntityType Name="Usuarios">
+        <EntityType Name="Usuario">
           <Key>
             <PropertyRef Name="id_usuario" />
           </Key>
@@ -92,14 +92,14 @@ warning 6002: The table/view 'Videos.dbo.Filtro' does not have a primary key def
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Usuarios_Rol">
+        <Association Name="FK_Usuario_Rol">
           <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
-          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Rol">
               <PropertyRef Name="id_rol" />
             </Principal>
-            <Dependent Role="Usuarios">
+            <Dependent Role="Usuario">
               <PropertyRef Name="rol" />
             </Dependent>
           </ReferentialConstraint>
@@ -134,7 +134,7 @@ warning 6002: The table/view 'Videos.dbo.Filtro' does not have a primary key def
           <EntitySet Name="Casettes" EntityType="Self.Casettes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Formato" EntityType="Self.Formato" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Videos" EntityType="Self.Videos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Filtro" EntityType="Self.Filtro" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -153,9 +153,9 @@ warning 6002: The table/view 'Videos.dbo.Filtro' does not have a primary key def
             <End Role="Videos" EntitySet="Videos" />
             <End Role="Filtro" EntitySet="Filtro" />
           </AssociationSet>
-          <AssociationSet Name="FK_Usuarios_Rol" Association="Self.FK_Usuarios_Rol">
+          <AssociationSet Name="FK_Usuario_Rol" Association="Self.FK_Usuario_Rol">
             <End Role="Rol" EntitySet="Rol" />
-            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
           <AssociationSet Name="FK_Videos_Casette" Association="Self.FK_Videos_Casette">
             <End Role="Casettes" EntitySet="Casettes" />
@@ -277,10 +277,10 @@ warning 6002: The table/view 'Videos.dbo.Filtro' does not have a primary key def
             <End Role="Filtro" EntitySet="Filtroes" />
           </AssociationSet>
           <EntitySet Name="Rols" EntityType="VideosModel.Rol" />
-          <EntitySet Name="Usuarios" EntityType="VideosModel.Usuario" />
-          <AssociationSet Name="FK_Usuarios_Rol" Association="VideosModel.FK_Usuarios_Rol">
+          <EntitySet Name="Usuario1" EntityType="VideosModel.Usuario1" />
+          <AssociationSet Name="FK_Usuario_Rol" Association="VideosModel.FK_Usuario_Rol">
             <End Role="Rol" EntitySet="Rols" />
-            <End Role="Usuario" EntitySet="Usuarios" />
+            <End Role="Usuario1" EntitySet="Usuario1" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Rol">
@@ -289,26 +289,26 @@ warning 6002: The table/view 'Videos.dbo.Filtro' does not have a primary key def
           </Key>
           <Property Name="id_rol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Usuarios" Relationship="VideosModel.FK_Usuarios_Rol" FromRole="Rol" ToRole="Usuario" />
+          <NavigationProperty Name="Usuarios1" Relationship="VideosModel.FK_Usuario_Rol" FromRole="Rol" ToRole="Usuario1" />
         </EntityType>
-        <EntityType Name="Usuario">
+        <EntityType Name="Usuario1">
           <Key>
             <PropertyRef Name="id_usuario" />
           </Key>
           <Property Name="id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="username" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="rol" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Rol1" Relationship="VideosModel.FK_Usuarios_Rol" FromRole="Usuario" ToRole="Rol" />
           <Property Name="password" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Rol1" Relationship="VideosModel.FK_Usuario_Rol" FromRole="Usuario1" ToRole="Rol" />
         </EntityType>
-        <Association Name="FK_Usuarios_Rol">
+        <Association Name="FK_Usuario_Rol">
           <End Type="VideosModel.Rol" Role="Rol" Multiplicity="1" />
-          <End Type="VideosModel.Usuario" Role="Usuario" Multiplicity="*" />
+          <End Type="VideosModel.Usuario1" Role="Usuario1" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Rol">
               <PropertyRef Name="id_rol" />
             </Principal>
-            <Dependent Role="Usuario">
+            <Dependent Role="Usuario1">
               <PropertyRef Name="rol" />
             </Dependent>
           </ReferentialConstraint>
@@ -368,9 +368,9 @@ warning 6002: The table/view 'Videos.dbo.Filtro' does not have a primary key def
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Usuarios">
-            <EntityTypeMapping TypeName="VideosModel.Usuario">
-              <MappingFragment StoreEntitySet="Usuarios">
+          <EntitySetMapping Name="Usuario1">
+            <EntityTypeMapping TypeName="VideosModel.Usuario1">
+              <MappingFragment StoreEntitySet="Usuario">
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="rol" ColumnName="rol" />
                 <ScalarProperty Name="username" ColumnName="username" />

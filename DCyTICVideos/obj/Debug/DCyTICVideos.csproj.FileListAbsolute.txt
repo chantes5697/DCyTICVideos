@@ -73,7 +73,6 @@ C:\Users\L-PLC-16\source\repos\DCyTICVideos\DCyTICVideos\bin\System.Web.WebPages
 C:\Users\L-PLC-16\source\repos\DCyTICVideos\DCyTICVideos\bin\Newtonsoft.Json.xml
 C:\Users\L-PLC-16\source\repos\DCyTICVideos\DCyTICVideos\bin\Antlr3.Runtime.pdb
 C:\Users\L-PLC-16\source\repos\DCyTICVideos\DCyTICVideos\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\L-PLC-16\source\repos\DCyTICVideos\DCyTICVideos\obj\Debug\DCyTICVideos.csprojAssemblyReference.cache
 C:\Users\L-PLC-16\source\repos\DCyTICVideos\DCyTICVideos\obj\Debug\DCyTICVideos.csproj.CoreCompileInputs.cache
 C:\Users\L-PLC-16\source\repos\DCyTICVideos\DCyTICVideos\obj\Debug\DCyTICVideos.csproj.CopyComplete
 C:\Users\L-PLC-16\source\repos\DCyTICVideos\DCyTICVideos\obj\Debug\DCyTICVideos.dll

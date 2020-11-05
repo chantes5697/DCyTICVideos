@@ -12,7 +12,7 @@ namespace DCyTICVideos
     using System;
     using System.Collections.Generic;
     
-    public partial class Usuario
+    public partial class Usuario1
     {
         public int id_usuario { get; set; }
         public string username { get; set; }

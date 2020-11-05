@@ -50,9 +50,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Usuarios">
-      <EntityTypeMapping TypeName="VideosModel.Usuario">
-        <MappingFragment StoreEntitySet="Usuarios">
+    <EntitySetMapping Name="Usuario1">
+      <EntityTypeMapping TypeName="VideosModel.Usuario1">
+        <MappingFragment StoreEntitySet="Usuario">
           <ScalarProperty Name="password" ColumnName="password" />
           <ScalarProperty Name="rol" ColumnName="rol" />
           <ScalarProperty Name="username" ColumnName="username" />

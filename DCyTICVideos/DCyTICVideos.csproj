@@ -135,7 +135,7 @@
     <Compile Include="Controllers\FiltroesController.cs" />
     <Compile Include="Controllers\FormatoesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\UsuariosController.cs" />
+    <Compile Include="Controllers\Usuario1Controller.cs" />
     <Compile Include="Controllers\VideosController.cs" />
     <Compile Include="Filtro.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -165,7 +165,7 @@
     <Compile Include="Rol.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Usuario.cs">
+    <Compile Include="Usuario1.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Video.cs">
@@ -245,11 +245,11 @@
     <Content Include="Views\Filtroes\Details.cshtml" />
     <Content Include="Views\Filtroes\Edit.cshtml" />
     <Content Include="Views\Filtroes\Index.cshtml" />
-    <Content Include="Views\Usuarios\Create.cshtml" />
-    <Content Include="Views\Usuarios\Delete.cshtml" />
-    <Content Include="Views\Usuarios\Details.cshtml" />
-    <Content Include="Views\Usuarios\Edit.cshtml" />
-    <Content Include="Views\Usuarios\Index.cshtml" />
+    <Content Include="Views\Usuario1\Create.cshtml" />
+    <Content Include="Views\Usuario1\Delete.cshtml" />
+    <Content Include="Views\Usuario1\Details.cshtml" />
+    <Content Include="Views\Usuario1\Edit.cshtml" />
+    <Content Include="Views\Usuario1\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

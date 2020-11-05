@@ -40,7 +40,7 @@ warning 6002: The table/view 'Videos.dbo.Filtro' does not have a primary key def
     <Property Name="id_rol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="nombre" Type="text" Nullable="false" />
   </EntityType>
-  <EntityType Name="Usuarios">
+  <EntityType Name="Usuario">
     <Key>
       <PropertyRef Name="id_usuario" />
     </Key>
@@ -87,14 +87,14 @@ warning 6002: The table/view 'Videos.dbo.Filtro' does not have a primary key def
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Usuarios_Rol">
+  <Association Name="FK_Usuario_Rol">
     <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
-    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Rol">
         <PropertyRef Name="id_rol" />
       </Principal>
-      <Dependent Role="Usuarios">
+      <Dependent Role="Usuario">
         <PropertyRef Name="rol" />
       </Dependent>
     </ReferentialConstraint>
@@ -129,7 +129,7 @@ warning 6002: The table/view 'Videos.dbo.Filtro' does not have a primary key def
     <EntitySet Name="Casettes" EntityType="Self.Casettes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Formato" EntityType="Self.Formato" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Videos" EntityType="Self.Videos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Filtro" EntityType="Self.Filtro" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
@@ -148,9 +148,9 @@ warning 6002: The table/view 'Videos.dbo.Filtro' does not have a primary key def
       <End Role="Videos" EntitySet="Videos" />
       <End Role="Filtro" EntitySet="Filtro" />
     </AssociationSet>
-    <AssociationSet Name="FK_Usuarios_Rol" Association="Self.FK_Usuarios_Rol">
+    <AssociationSet Name="FK_Usuario_Rol" Association="Self.FK_Usuario_Rol">
       <End Role="Rol" EntitySet="Rol" />
-      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Usuario" EntitySet="Usuario" />
     </AssociationSet>
     <AssociationSet Name="FK_Videos_Casette" Association="Self.FK_Videos_Casette">
       <End Role="Casettes" EntitySet="Casettes" />

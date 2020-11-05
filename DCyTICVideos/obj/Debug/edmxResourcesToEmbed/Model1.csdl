@@ -107,10 +107,10 @@
       <End Role="Filtro" EntitySet="Filtroes" />
     </AssociationSet>
     <EntitySet Name="Rols" EntityType="VideosModel.Rol" />
-    <EntitySet Name="Usuarios" EntityType="VideosModel.Usuario" />
-    <AssociationSet Name="FK_Usuarios_Rol" Association="VideosModel.FK_Usuarios_Rol">
+    <EntitySet Name="Usuario1" EntityType="VideosModel.Usuario1" />
+    <AssociationSet Name="FK_Usuario_Rol" Association="VideosModel.FK_Usuario_Rol">
       <End Role="Rol" EntitySet="Rols" />
-      <End Role="Usuario" EntitySet="Usuarios" />
+      <End Role="Usuario1" EntitySet="Usuario1" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Rol">
@@ -119,26 +119,26 @@
     </Key>
     <Property Name="id_rol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="nombre" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Usuarios" Relationship="VideosModel.FK_Usuarios_Rol" FromRole="Rol" ToRole="Usuario" />
+    <NavigationProperty Name="Usuarios1" Relationship="VideosModel.FK_Usuario_Rol" FromRole="Rol" ToRole="Usuario1" />
   </EntityType>
-  <EntityType Name="Usuario">
+  <EntityType Name="Usuario1">
     <Key>
       <PropertyRef Name="id_usuario" />
     </Key>
     <Property Name="id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="username" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="rol" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Rol1" Relationship="VideosModel.FK_Usuarios_Rol" FromRole="Usuario" ToRole="Rol" />
     <Property Name="password" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Rol1" Relationship="VideosModel.FK_Usuario_Rol" FromRole="Usuario1" ToRole="Rol" />
   </EntityType>
-  <Association Name="FK_Usuarios_Rol">
+  <Association Name="FK_Usuario_Rol">
     <End Type="VideosModel.Rol" Role="Rol" Multiplicity="1" />
-    <End Type="VideosModel.Usuario" Role="Usuario" Multiplicity="*" />
+    <End Type="VideosModel.Usuario1" Role="Usuario1" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Rol">
         <PropertyRef Name="id_rol" />
       </Principal>
-      <Dependent Role="Usuario">
+      <Dependent Role="Usuario1">
         <PropertyRef Name="rol" />
       </Dependent>
     </ReferentialConstraint>

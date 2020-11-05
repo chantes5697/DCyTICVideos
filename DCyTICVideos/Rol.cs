@@ -17,13 +17,13 @@ namespace DCyTICVideos
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Rol()
         {
-            this.Usuarios = new HashSet<Usuario>();
+            this.Usuarios1 = new HashSet<Usuario1>();
         }
     
         public int id_rol { get; set; }
         public string nombre { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Usuario> Usuarios { get; set; }
+        public virtual ICollection<Usuario1> Usuarios1 { get; set; }
     }
 }

@@ -10,112 +10,112 @@ using DCyTICVideos;
 
 namespace DCyTICVideos.Controllers
 {
-    public class UsuariosController : Controller
+    public class Usuario1Controller : Controller
     {
         private VideosEntities db = new VideosEntities();
 
-        // GET: Usuarios
+        // GET: Usuario1
         public ActionResult Index()
         {
-            var usuarios = db.Usuarios.Include(u => u.Rol1);
-            return View(usuarios.ToList());
+            var usuario1 = db.Usuario1.Include(u => u.Rol1);
+            return View(usuario1.ToList());
         }
 
-        // GET: Usuarios/Details/5
+        // GET: Usuario1/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Usuario usuario = db.Usuarios.Find(id);
-            if (usuario == null)
+            Usuario1 usuario1 = db.Usuario1.Find(id);
+            if (usuario1 == null)
             {
                 return HttpNotFound();
             }
-            return View(usuario);
+            return View(usuario1);
         }
 
-        // GET: Usuarios/Create
+        // GET: Usuario1/Create
         public ActionResult Create()
         {
-            ViewBag.rol = new SelectList(db.Rols, "id_rol", "nombre", "password");
+            ViewBag.rol = new SelectList(db.Rols, "id_rol", "nombre");
             return View();
         }
 
-        // POST: Usuarios/Create
+        // POST: Usuario1/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id_usuario,username,rol,password")] Usuario usuario)
+        public ActionResult Create([Bind(Include = "id_usuario,username,rol,password")] Usuario1 usuario1)
         {
             if (ModelState.IsValid)
             {
-                db.Usuarios.Add(usuario);
+                db.Usuario1.Add(usuario1);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.rol = new SelectList(db.Rols, "id_rol", "nombre", usuario.rol, "password");
-            return View(usuario);
+            ViewBag.rol = new SelectList(db.Rols, "id_rol", "nombre", usuario1.rol);
+            return View(usuario1);
         }
 
-        // GET: Usuarios/Edit/5
+        // GET: Usuario1/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Usuario usuario = db.Usuarios.Find(id);
-            if (usuario == null)
+            Usuario1 usuario1 = db.Usuario1.Find(id);
+            if (usuario1 == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.rol = new SelectList(db.Rols, "id_rol", "nombre", usuario.rol, "password");
-            return View(usuario);
+            ViewBag.rol = new SelectList(db.Rols, "id_rol", "nombre", usuario1.rol);
+            return View(usuario1);
         }
 
-        // POST: Usuarios/Edit/5
+        // POST: Usuario1/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id_usuario,username,rol")] Usuario usuario)
+        public ActionResult Edit([Bind(Include = "id_usuario,username,rol,password")] Usuario1 usuario1)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(usuario).State = EntityState.Modified;
+                db.Entry(usuario1).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.rol = new SelectList(db.Rols, "id_rol", "nombre", usuario.rol, "password");
-            return View(usuario);
+            ViewBag.rol = new SelectList(db.Rols, "id_rol", "nombre", usuario1.rol);
+            return View(usuario1);
         }
 
-        // GET: Usuarios/Delete/5
+        // GET: Usuario1/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Usuario usuario = db.Usuarios.Find(id);
-            if (usuario == null)
+            Usuario1 usuario1 = db.Usuario1.Find(id);
+            if (usuario1 == null)
             {
                 return HttpNotFound();
             }
-            return View(usuario);
+            return View(usuario1);
         }
 
-        // POST: Usuarios/Delete/5
+        // POST: Usuario1/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Usuario usuario = db.Usuarios.Find(id);
-            db.Usuarios.Remove(usuario);
+            Usuario1 usuario1 = db.Usuario1.Find(id);
+            db.Usuario1.Remove(usuario1);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

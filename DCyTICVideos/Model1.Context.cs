@@ -30,6 +30,6 @@ namespace DCyTICVideos
         public virtual DbSet<Video> Videos { get; set; }
         public virtual DbSet<Filtro> Filtroes { get; set; }
         public virtual DbSet<Rol> Rols { get; set; }
-        public virtual DbSet<Usuario> Usuarios { get; set; }
+        public virtual DbSet<Usuario1> Usuario1 { get; set; }
     }
 }
